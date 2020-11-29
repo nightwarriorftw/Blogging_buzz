@@ -24,4 +24,7 @@ deploy:
   app: "$AWS_EB_APPLICATION"
   env: "$AWS_EB_ENVIRONMENT"
   bucket_name: "$AWS_EB_S3_BUCKET"
+  branches:
+    only:
+      - main
   wait_until_deployed: true
