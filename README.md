@@ -1,6 +1,5 @@
 # Papplu Pops
 A Blogging Website
-Hello world
 
 ## Installation Steps
 
