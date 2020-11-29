@@ -1,9 +1,27 @@
 os:
-  - linux
-
+- linux
 dist: xenial
-
 language: python
-
+python:
+- 3.6
+before_install:
+- python --version
+- pip install -U pip
+- pip install -U pytest pytest-cov
+- pip install codecov
 script:
-  - python -m pytest -v
+- python -m pytest -v
+after_success:
+- pytest --cov=./
+- codecov
+deploy:
+  provider: elasticbeanstalk
+  access_key_id:
+    secure: "$AWS_ACCESS_KEY_ID"
+  secret_access_key:
+    secure: "$AWS_ACCESS_KEY_SECRET"
+  region: "$AWS_REGION"
+  app: "$AWS_EB_APPLICATION"
+  env: "$AWS_EB_ENVIRONMENT"
+  bucket_name: "$AWS_EB_S3_BUCKET"
+  wait_until_deployed: true
