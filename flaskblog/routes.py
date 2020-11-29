@@ -146,3 +146,7 @@ def delete_post(post_id):
 @app.route('/test')
 def test_urban_route():
     return "Works!"
+
+@app.route('/prod_testing')
+def test_prod_route():
+    return "Welcome to production world"
