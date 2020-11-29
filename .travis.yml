@@ -16,6 +16,7 @@ after_success:
 - codecov
 deploy:
   provider: elasticbeanstalk
+  wait_until_deployed: true
   access_key_id:
     secure: "$AWS_ACCESS_KEY_ID"
   secret_access_key:
@@ -25,8 +26,4 @@ deploy:
   env: "$AWS_EB_ENVIRONMENT"
   bucket_name: "$AWS_EB_S3_BUCKET"
   on:
-    repo: aksharanigam1112/Blog-Website 
-    branches:    
-      only:      
-        - main
-  wait_until_deployed: true
+    branch: main
