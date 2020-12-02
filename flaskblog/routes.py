@@ -3,10 +3,10 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from flaskblog import app, db, bcrypt
-from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
+from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, SearchForm
 from flaskblog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
-
+from random import randint
 
 @app.route("/")
 @app.route("/home")
@@ -69,6 +69,35 @@ def save_picture(form_picture):
     i.save(picture_path)
 
     return picture_fn
+
+
+@app.route("/search", methods=['GET', 'POST'])
+def search():
+    form = SearchForm()
+    posts = Post.query.all()
+    sortedPosts = []
+
+    # if request.method == 'POST':
+    if form.validate_on_submit():
+        q = form.query.data
+        x = q.split()
+        f = False
+
+        for post in posts:
+            f = False
+            y = post.title.split()
+            for i in x:
+                for j in y:
+                    if(i.lower() == j.lower()):
+                        sortedPosts.append(post)
+                        f = True
+                        break
+                if(f):
+                    break     
+
+        return render_template('search.html', form=form, posts=sortedPosts)
+    return render_template('search.html', form=form, posts=sortedPosts)
+    
 
 
 @app.route("/account", methods=['GET', 'POST'])
