@@ -1,6 +1,6 @@
 # Description
 A Blogging Website for people to express their thoughts and experiences on various topics, be it Coding, Politics or Travel etc.
-asdasdasdadasdfsadfasdfsdfsdaf
+
 
 ## Installation Steps
 
